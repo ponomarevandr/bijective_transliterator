@@ -33,6 +33,12 @@
 *.out
 *.app
 
+# ------------------------------ CMake
+
+build/
+bin/
+lib/
+
 # ------------------------------ Sublime
 
 # Cache files for Sublime Text
