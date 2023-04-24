@@ -5,7 +5,9 @@
 
 namespace Transliterator {
 
-std::string russianToEnglish(const std::string&);
-std::string englishToRussian(const std::string&);
+std::wstring russianToEnglish(const std::wstring&);
+std::wstring englishToRussian(const std::wstring&);
+
+void setNeutralLocale();
 
 }

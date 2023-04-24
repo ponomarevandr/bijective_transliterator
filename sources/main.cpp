@@ -1,9 +1,10 @@
 #include "RuEnTransliterator.h"
 
 #include <iostream>
+#include <string>
 
 
 int main() {
-	std::cout << Transliterator::russianToEnglish("кек") << "\n";
+	Transliterator::setNeutralLocale();
 	return 0;
 }

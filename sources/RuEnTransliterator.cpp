@@ -1,14 +1,21 @@
 #include "RuEnTransliterator.h"
 
+#include <locale.h>
+
 
 namespace Transliterator {
 
-std::string russianToEnglish(const std::string& text) {
-	return "Not implemented!";
+std::wstring russianToEnglish(const std::wstring& text) {
+	return L"Not implemented!";
 }
 
-std::string englishToRussian(const std::string& text) {
-	return "Не реализовано!";
+std::wstring englishToRussian(const std::wstring& text) {
+	return L"Не реализовано!";
+}
+
+
+void setNeutralLocale() {
+	setlocale(LC_ALL, "");
 }
 
 }
