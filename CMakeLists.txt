@@ -6,6 +6,8 @@ project(BijectiveTransliterator)
 set(SOURCES
 	sources/RuEnTransliterator.cpp
 	sources/symbolic_analyser/encoding.cpp
+	sources/automata/nondeterministic_automaton.cpp
+	sources/automata/deterministic_automaton.cpp
 )
 
 set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} $ENV{CUSTOM_FLAGS}")

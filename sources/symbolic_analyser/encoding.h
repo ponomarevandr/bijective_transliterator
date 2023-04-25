@@ -4,12 +4,12 @@
 #include <string>
 
 
-using WordCodes = std::vector<int8_t>;
+using Code = int8_t;
+using WordCodes = std::vector<Code>;
 
-extern const size_t RUSSIAN_CODE_SIZE;
-extern const size_t ENGLISH_CODE_SIZE;
-extern const int8_t CODE_END;
-extern const int8_t CODE_UNKNOWN;
+constexpr size_t CODE_SIZE = 68;
+extern const Code CODE_END;
+extern const Code CODE_UNKNOWN;
 
 bool isRussian(wchar_t);
 bool isEnglish(wchar_t);
@@ -22,10 +22,10 @@ wchar_t upperCase(wchar_t);
 std::wstring lowerCase(const std::wstring);
 std::wstring upperCase(const std::wstring);
 
-int8_t encodeRussian(wchar_t);
-int8_t encodeEnglish(wchar_t);
-wchar_t decodeRussian(int8_t);
-wchar_t decodeEnglish(int8_t);
+Code encodeRussian(wchar_t);
+Code encodeEnglish(wchar_t);
+wchar_t decodeRussian(Code);
+wchar_t decodeEnglish(Code);
 
 WordCodes encodeRussian(const std::wstring&);
 WordCodes encodeEnglish(const std::wstring&);

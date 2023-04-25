@@ -1,10 +1,8 @@
 #include "encoding.h"
 
 
-const size_t RUSSIAN_CODE_SIZE = 68;
-const size_t ENGLISH_CODE_SIZE = 54;
-const int8_t CODE_END = 0;
-const int8_t CODE_UNKNOWN = 1;
+const Code CODE_END = 0;
+const Code CODE_UNKNOWN = 1;
 
 
 bool isRussianLowerCase(wchar_t symbol) {
@@ -80,7 +78,7 @@ std::wstring upperCase(const std::wstring word) {
 }
 
 
-int8_t encodeRussian(wchar_t symbol) {
+Code encodeRussian(wchar_t symbol) {
 	if (L'а' <= symbol && symbol <= L'е')
 		return 2 + (symbol - L'а');
 	if (symbol == L'ё')
@@ -96,7 +94,7 @@ int8_t encodeRussian(wchar_t symbol) {
 	return CODE_UNKNOWN;
 }
 
-int8_t encodeEnglish(wchar_t symbol) {
+Code encodeEnglish(wchar_t symbol) {
 	if (L'a' <= symbol && symbol <= L'z')
 		return 2 + (symbol - L'a');
 	if (L'A' <= symbol && symbol <= L'Z')
@@ -105,7 +103,7 @@ int8_t encodeEnglish(wchar_t symbol) {
 }
 
 
-wchar_t decodeRussian(int8_t code) {
+wchar_t decodeRussian(Code code) {
 	if (code == CODE_END)
 		return L'×';
 	if (2 <= code && code <= 7)
@@ -123,7 +121,7 @@ wchar_t decodeRussian(int8_t code) {
 	return L'¿';
 }
 
-wchar_t decodeEnglish(int8_t code) {
+wchar_t decodeEnglish(Code code) {
 	if (code == CODE_END)
 		return L'×';
 	if (2 <= code && code <= 27)
