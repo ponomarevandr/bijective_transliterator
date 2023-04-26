@@ -50,7 +50,15 @@ void NondeterministicAutomaton::step(Code code) {
 			new_state[j] = true;
 		}
 	}
+	history.push_back(std::move(current_state));
 	current_state = new_state;
+}
+
+void NondeterministicAutomaton::undoStep() {
+	if (history.empty())
+		return;
+	current_state = std::move(history.back());
+	history.pop_back();
 }
 
 size_t NondeterministicAutomaton::getRoot() const {

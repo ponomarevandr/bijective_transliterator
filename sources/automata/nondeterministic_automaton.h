@@ -24,6 +24,7 @@ private:
 private:
 	std::vector<Node> nodes;
 	MaskState current_state;
+	std::vector<MaskState> history;
 
 public:
 	NondeterministicAutomaton();
@@ -32,6 +33,7 @@ public:
 	bool isCurrentTerminal() const;
 	ActionFunction getCurrentAction() const;
 	void step(Code code);
+	void undoStep();
 	size_t getRoot() const;
 	size_t addNode(size_t next_default);
 	void setTerminalAndAction(size_t node, ActionFunction action);
