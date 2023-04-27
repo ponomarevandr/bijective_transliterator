@@ -8,6 +8,7 @@ set(SOURCES
 	sources/symbolic_analyser/encoding.cpp
 	sources/automata/nondeterministic_automaton.cpp
 	sources/automata/deterministic_automaton.cpp
+	sources/automata/determinizer.cpp
 )
 
 set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} $ENV{CUSTOM_FLAGS}")
