@@ -105,3 +105,16 @@ void DeterministicAutomaton::updateIsPerspective() {
 		updateIsPerspective(i);
 	}
 }
+
+void DeterministicAutomaton::debugPrint(std::wostream& out) const {
+	out << "Deterministic automaton with " << nodes.size() << " nodes\n";
+	for (size_t i = 0; i < nodes.size(); ++i) {
+		out << "node " << i << " (terminal: " << nodes[i].is_terminal << "):\n";
+		for (size_t j = 0; j < CODE_SIZE; ++j) {
+			if (nodes[i].next[j] == nodes[i].next[CODE_SIZE])
+				continue;
+			out << "\t" << j << " --> " << nodes[i].next[j] << ";\n";
+		}
+		out << "\tdefault --> " << nodes[i].next[CODE_SIZE] << ";\n";
+	}
+}

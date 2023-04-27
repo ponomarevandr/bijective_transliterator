@@ -2,6 +2,7 @@
 
 #include "symbolic_analyser/encoding.h"
 
+#include <iostream>
 #include <vector>
 #include <functional>
 
@@ -44,4 +45,5 @@ public:
 	void setTerminalAndAction(size_t node, ActionFunction action);
 	void setNext(size_t node, Code code, size_t next);
 	void updateIsPerspective();
+	void debugPrint(std::wostream&) const;
 };

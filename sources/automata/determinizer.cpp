@@ -45,3 +45,7 @@ void Determinizer::run() {
 	index_of_mask[source.getCurrentState()] = result.getCurrentState();
 	buildingDfs();
 }
+
+DeterministicAutomaton Determinizer::getResult() {
+	return std::move(result);
+}

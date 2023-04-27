@@ -1,7 +1,7 @@
 #pragma once
 
-#include "nondeterministic_automaton.h"
-#include "deterministic_automaton.h"
+#include "automata/nondeterministic_automaton.h"
+#include "automata/deterministic_automaton.h"
 
 #include <vector>
 #include <map>

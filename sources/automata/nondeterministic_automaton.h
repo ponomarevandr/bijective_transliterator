@@ -2,6 +2,7 @@
 
 #include "symbolic_analyser/encoding.h"
 
+#include <iostream>
 #include <vector>
 #include <functional>
 
@@ -38,4 +39,5 @@ public:
 	size_t addNode(size_t next_default);
 	void setTerminalAndAction(size_t node, ActionFunction action);
 	void addNext(size_t node, Code code, size_t next);
+	void debugPrint(std::wostream&) const;
 };

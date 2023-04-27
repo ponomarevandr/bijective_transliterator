@@ -78,3 +78,22 @@ void NondeterministicAutomaton::setTerminalAndAction(size_t node, ActionFunction
 void NondeterministicAutomaton::addNext(size_t node, Code code, size_t next) {
 	nodes[node].next[code].push_back(next);
 }
+
+void NondeterministicAutomaton::debugPrint(std::wostream& out) const {
+	out << "Nondeterministic automaton with " << nodes.size() << " nodes\n";
+	for (size_t i = 0; i < nodes.size(); ++i) {
+		out << "node " << i << " (terminal: " << nodes[i].is_terminal << "):\n";
+		for (size_t j = 0; j < CODE_SIZE; ++j) {
+			if (nodes[i].next[j].empty())
+				continue;
+			out << "\t" << j << " --> ";
+			for (size_t k = 0; k < nodes[i].next[j].size(); ++k) {
+				out << nodes[i].next[j][k];
+				if (k + 1 < nodes[i].next[j].size())
+					out << ", ";
+			}
+			out << ";\n";
+		}
+		out << "\tdefault --> " << nodes[i].next_default << ";\n";
+	}
+}
