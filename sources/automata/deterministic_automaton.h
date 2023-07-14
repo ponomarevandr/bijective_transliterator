@@ -13,7 +13,7 @@ public:
 
 private:
 	struct Node {
-		size_t next[CODE_SIZE + 1];
+		size_t next[CODE_LOWER_SIZE + 1];
 		bool is_terminal;
 		bool is_perspective;
 		ActionFunction action;

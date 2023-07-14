@@ -5,7 +5,7 @@
 
 DeterministicAutomaton::Node::Node(size_t next_default, bool is_terminal):
 		is_terminal(is_terminal) {
-	for (size_t i = 0; i <= CODE_SIZE; ++i) {
+	for (size_t i = 0; i <= CODE_LOWER_SIZE; ++i) {
 		next[i] = next_default;
 	}
 }
@@ -90,7 +90,7 @@ void DeterministicAutomaton::updateIsPerspective(size_t node) {
 			nodes[node].is_perspective = true;
 			return;
 		}
-		for (size_t i = 0; i <= CODE_SIZE; ++i) {
+		for (size_t i = 0; i <= CODE_LOWER_SIZE; ++i) {
 			size_t next = nodes[current].next[i];
 			if (is_visited[next])
 				continue;
@@ -110,11 +110,11 @@ void DeterministicAutomaton::debugPrint(std::wostream& out) const {
 	out << "Deterministic automaton with " << nodes.size() << " nodes\n";
 	for (size_t i = 0; i < nodes.size(); ++i) {
 		out << "node " << i << " (terminal: " << nodes[i].is_terminal << "):\n";
-		for (size_t j = 0; j < CODE_SIZE; ++j) {
-			if (nodes[i].next[j] == nodes[i].next[CODE_SIZE])
+		for (size_t j = 0; j < CODE_LOWER_SIZE; ++j) {
+			if (nodes[i].next[j] == nodes[i].next[CODE_LOWER_SIZE])
 				continue;
 			out << "\t" << j << " --> " << nodes[i].next[j] << ";\n";
 		}
-		out << "\tdefault --> " << nodes[i].next[CODE_SIZE] << ";\n";
+		out << "\tdefault --> " << nodes[i].next[CODE_LOWER_SIZE] << ";\n";
 	}
 }

@@ -83,7 +83,7 @@ void NondeterministicAutomaton::debugPrint(std::wostream& out) const {
 	out << "Nondeterministic automaton with " << nodes.size() << " nodes\n";
 	for (size_t i = 0; i < nodes.size(); ++i) {
 		out << "node " << i << " (terminal: " << nodes[i].is_terminal << "):\n";
-		for (size_t j = 0; j < CODE_SIZE; ++j) {
+		for (size_t j = 0; j < CODE_LOWER_SIZE; ++j) {
 			if (nodes[i].next[j].empty())
 				continue;
 			out << "\t" << j << " --> ";

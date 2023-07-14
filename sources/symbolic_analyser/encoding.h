@@ -8,6 +8,8 @@ using Code = int8_t;
 using WordCodes = std::vector<Code>;
 
 constexpr size_t CODE_SIZE = 68;
+constexpr size_t CODE_LOWER_SIZE = 35;
+
 extern const Code CODE_END;
 extern const Code CODE_UNKNOWN;
 

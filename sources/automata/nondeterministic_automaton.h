@@ -15,7 +15,7 @@ public:
 private:
 	struct Node {
 		size_t next_default;
-		std::vector<size_t> next[CODE_SIZE];
+		std::vector<size_t> next[CODE_LOWER_SIZE];
 		bool is_terminal;
 		ActionFunction action;
 
