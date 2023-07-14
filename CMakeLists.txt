@@ -10,6 +10,7 @@ set(SOURCES
 	sources/automata/deterministic_automaton.cpp
 	sources/automata/determinizer.cpp
 	sources/rules/rules_processor.cpp
+	sources/rules/automata_creator.cpp
 )
 
 set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} $ENV{CUSTOM_FLAGS}")
