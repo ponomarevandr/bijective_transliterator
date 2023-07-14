@@ -14,12 +14,9 @@ public:
 
 private:
 	struct Node {
-		size_t next_default;
 		std::vector<size_t> next[CODE_LOWER_SIZE];
-		bool is_terminal;
+		bool is_terminal = false;
 		ActionFunction action;
-
-		Node(size_t next_default, bool is_terminal = false);
 	};
 
 private:
@@ -36,8 +33,8 @@ public:
 	void step(Code code);
 	void undoStep();
 	size_t getRoot() const;
-	size_t addNode(size_t next_default);
-	void setTerminalAndAction(size_t node, ActionFunction action);
+	size_t addNode();
+	void setTerminal(size_t node, ActionFunction action);
 	void addNext(size_t node, Code code, size_t next);
 	void debugPrint(std::wostream&) const;
 };

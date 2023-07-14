@@ -20,7 +20,7 @@ Determinizer::Determinizer(NondeterministicAutomaton&& source): source(std::move
 void Determinizer::buildingDfs() {
 	MaskState current = source.getCurrentState();
 	size_t current_index = index_of_mask[current];
-	for (size_t i = 0; i <= CODE_LOWER_SIZE; ++i) {
+	for (size_t i = 0; i < CODE_LOWER_SIZE; ++i) {
 		source.step(i);
 		MaskState next = source.getCurrentState();
 		if (index_of_mask.count(next)) {
@@ -28,7 +28,7 @@ void Determinizer::buildingDfs() {
 			source.undoStep();
 			continue;
 		}
-		size_t next_index = result.addNode(0);
+		size_t next_index = result.addNode();
 		index_of_mask[next] = next_index;
 		result.setNext(current_index, i, next_index);
 		result.step(i);

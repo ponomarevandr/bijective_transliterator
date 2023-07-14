@@ -13,17 +13,17 @@ public:
 
 private:
 	struct Node {
-		size_t next[CODE_LOWER_SIZE + 1];
-		bool is_terminal;
-		bool is_perspective;
+		size_t next[CODE_LOWER_SIZE];
+		bool is_terminal = false;
+		bool is_perspective = false;
 		ActionFunction action;
 
-		Node(size_t next_default, bool is_terminal = false);
+		Node();
 	};
 
 private:
 	std::vector<Node> nodes;
-	size_t current_state;
+	size_t current_state = 0;
 	std::vector<size_t> history;
 	std::vector<size_t> series_length;
 	Code previous_code;
@@ -37,12 +37,12 @@ public:
 	size_t getCurrentState() const;
 	bool isCurrentTerminal() const;
 	bool isCurrentPerspective() const;
-	WordCodes doCurrentAction() const;
+	WordCodes currentActionResult() const;
 	void step(Code code);
 	void undoStep();
 	size_t getRoot() const;
-	size_t addNode(size_t next_default);
-	void setTerminalAndAction(size_t node, ActionFunction action);
+	size_t addNode();
+	void setTerminal(size_t node, ActionFunction action);
 	void setNext(size_t node, Code code, size_t next);
 	void updateIsPerspective();
 	void debugPrint(std::wostream&) const;

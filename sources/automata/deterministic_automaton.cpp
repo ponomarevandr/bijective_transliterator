@@ -1,17 +1,17 @@
 #include "deterministic_automaton.h"
 
 #include <queue>
+#include <algorithm>
 
 
-DeterministicAutomaton::Node::Node(size_t next_default, bool is_terminal):
-		is_terminal(is_terminal) {
-	for (size_t i = 0; i <= CODE_LOWER_SIZE; ++i) {
-		next[i] = next_default;
+DeterministicAutomaton::Node::Node() {
+	for (size_t i = 0; i < CODE_LOWER_SIZE; ++i) {
+		next[i] = 0;
 	}
 }
 
-DeterministicAutomaton::DeterministicAutomaton(): current_state(0) {
-	nodes.emplace_back(0);
+DeterministicAutomaton::DeterministicAutomaton() {
+	nodes.emplace_back();
 }
 
 void DeterministicAutomaton::reset() {
@@ -32,7 +32,7 @@ bool DeterministicAutomaton::isCurrentPerspective() const {
 	return nodes[current_state].is_perspective;
 }
 
-WordCodes DeterministicAutomaton::doCurrentAction() const {
+WordCodes DeterministicAutomaton::currentActionResult() const {
 	return nodes[current_state].action(series_length);
 }
 
@@ -63,12 +63,12 @@ size_t DeterministicAutomaton::getRoot() const {
 	return 0;
 }
 
-size_t DeterministicAutomaton::addNode(size_t next_default) {
-	nodes.emplace_back(next_default);
+size_t DeterministicAutomaton::addNode() {
+	nodes.emplace_back();
 	return nodes.size() - 1;
 }
 
-void DeterministicAutomaton::setTerminalAndAction(size_t node, ActionFunction action) {
+void DeterministicAutomaton::setTerminal(size_t node, ActionFunction action) {
 	nodes[node].is_terminal = true;
 	nodes[node].action = action;
 }
@@ -90,7 +90,7 @@ void DeterministicAutomaton::updateIsPerspective(size_t node) {
 			nodes[node].is_perspective = true;
 			return;
 		}
-		for (size_t i = 0; i <= CODE_LOWER_SIZE; ++i) {
+		for (size_t i = 0; i < CODE_LOWER_SIZE; ++i) {
 			size_t next = nodes[current].next[i];
 			if (is_visited[next])
 				continue;
@@ -109,12 +109,19 @@ void DeterministicAutomaton::updateIsPerspective() {
 void DeterministicAutomaton::debugPrint(std::wostream& out) const {
 	out << "Deterministic automaton with " << nodes.size() << " nodes\n";
 	for (size_t i = 0; i < nodes.size(); ++i) {
+		std::vector<std::pair<size_t, Code>> edges;
+		for (size_t j = 0; j < CODE_LOWER_SIZE; ++j) {
+			edges.emplace_back(nodes[i].next[j], j);
+		}
+		std::sort(edges.begin(), edges.end());
 		out << "node " << i << " (terminal: " << nodes[i].is_terminal << "):\n";
 		for (size_t j = 0; j < CODE_LOWER_SIZE; ++j) {
-			if (nodes[i].next[j] == nodes[i].next[CODE_LOWER_SIZE])
+			out << edges[j].second;
+			if (j + 1 < CODE_LOWER_SIZE && edges[j].first == edges[j + 1].first) {
+				out << ", ";
 				continue;
-			out << "\t" << j << " --> " << nodes[i].next[j] << ";\n";
+			}
+			out << " --> " << edges[j].first << ";\n";
 		}
-		out << "\tdefault --> " << nodes[i].next[CODE_LOWER_SIZE] << ";\n";
 	}
 }

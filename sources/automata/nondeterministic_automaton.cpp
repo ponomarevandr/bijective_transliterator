@@ -1,12 +1,8 @@
 #include "nondeterministic_automaton.h"
 
 
-NondeterministicAutomaton::Node::Node(size_t next_default, bool is_terminal):
-	next_default(next_default), is_terminal(is_terminal) {}
-
-
 NondeterministicAutomaton::NondeterministicAutomaton() {
-	nodes.emplace_back(0);
+	nodes.emplace_back();
 	current_state.push_back(true);
 }
 
@@ -42,10 +38,6 @@ void NondeterministicAutomaton::step(Code code) {
 	for (size_t i = 0; i < nodes.size(); ++i) {
 		if (!current_state[i])
 			continue;
-		if (nodes[i].next[code].empty()) {
-			new_state[nodes[i].next_default] = true;
-			continue;
-		}
 		for (size_t j : nodes[i].next[code]) {
 			new_state[j] = true;
 		}
@@ -65,12 +57,12 @@ size_t NondeterministicAutomaton::getRoot() const {
 	return 0;
 }
 
-size_t NondeterministicAutomaton::addNode(size_t next_default) {
-	nodes.emplace_back(next_default);
+size_t NondeterministicAutomaton::addNode() {
+	nodes.emplace_back();
 	return nodes.size() - 1;
 }
 
-void NondeterministicAutomaton::setTerminalAndAction(size_t node, ActionFunction action) {
+void NondeterministicAutomaton::setTerminal(size_t node, ActionFunction action) {
 	nodes[node].is_terminal = true;
 	nodes[node].action = action;
 }
@@ -94,6 +86,5 @@ void NondeterministicAutomaton::debugPrint(std::wostream& out) const {
 			}
 			out << ";\n";
 		}
-		out << "\tdefault --> " << nodes[i].next_default << ";\n";
 	}
 }

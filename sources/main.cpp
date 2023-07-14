@@ -13,10 +13,10 @@ int main() {
 	Transliterator::setNeutralLocale();
 
 	NondeterministicAutomaton nondet;
-	nondet.addNode(0);
-	nondet.addNode(0);
-	nondet.addNode(0);
-	nondet.addNode(0);
+	nondet.addNode();
+	nondet.addNode();
+	nondet.addNode();
+	nondet.addNode();
 	nondet.addNext(0, 2, 1);
 	nondet.addNext(0, 2, 2);
 	nondet.addNext(0, 3, 1);
