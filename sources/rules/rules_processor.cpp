@@ -1,5 +1,7 @@
 #include "rules_processor.h"
 
+#include <iostream>
+
 
 void RulesProcessor::Instruction::append(WordCodes& word_codes, size_t number, Code code) {
 	for (size_t i = 0; i < number; ++i) {
@@ -93,10 +95,8 @@ std::vector<std::wstring> RulesProcessor::split(const std::wstring& text) {
 			result.back().push_back(text[i]);
 			continue;
 		}
-		result.emplace_back();
-		while (i < text.size() && std::isspace(text[i])) {
-			++i;
-		}
+		if (!result.back().empty())
+			result.emplace_back();
 	}
 	return result;
 }

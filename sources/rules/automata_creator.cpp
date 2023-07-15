@@ -3,8 +3,6 @@
 #include "automata/nondeterministic_automaton.h"
 #include "automata/determinizer.h"
 
-#include <iostream>
-
 
 void AutomataCreator::run() {
 	rules_processor.run();
