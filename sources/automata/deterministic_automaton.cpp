@@ -114,7 +114,8 @@ void DeterministicAutomaton::debugPrint(std::wostream& out) const {
 			edges.emplace_back(nodes[i].next[j], j);
 		}
 		std::sort(edges.begin(), edges.end());
-		out << "node " << i << " (terminal: " << nodes[i].is_terminal << "):\n";
+		out << "node " << i << " (terminal: " << nodes[i].is_terminal << "; perspective: " <<
+			nodes[i].is_perspective << "):\n";
 		for (size_t j = 0; j < CODE_LOWER_SIZE; ++j) {
 			out << edges[j].second;
 			if (j + 1 < CODE_LOWER_SIZE && edges[j].first == edges[j + 1].first) {

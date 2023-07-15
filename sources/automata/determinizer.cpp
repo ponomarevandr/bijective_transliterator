@@ -32,6 +32,8 @@ void Determinizer::buildingDfs() {
 		index_of_mask[next] = next_index;
 		result.setNext(current_index, i, next_index);
 		result.step(i);
+		if (source.isCurrentTerminal())
+			result.setTerminal(next_index, source.getCurrentAction());
 		buildingDfs();
 		source.undoStep();
 		result.undoStep();
@@ -44,6 +46,7 @@ void Determinizer::run() {
 	index_of_mask.clear();
 	index_of_mask[source.getCurrentState()] = result.getCurrentState();
 	buildingDfs();
+	result.updateIsPerspective();
 }
 
 DeterministicAutomaton Determinizer::getResult() {

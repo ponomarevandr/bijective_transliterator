@@ -3,6 +3,8 @@
 #include "automata/nondeterministic_automaton.h"
 #include "automata/determinizer.h"
 
+#include <iostream>
+
 
 void AutomataCreator::run() {
 	rules_processor.run();
@@ -46,7 +48,7 @@ AutomataCreator::AutomataCreator() {
 	rules_processor.addRuleText(L"й <--> y");
 	rules_processor.addRuleText(L"ц <--> c");
 
-	/*rules_processor.addRuleText(L"ч		<--> ch");
+	rules_processor.addRuleText(L"ч		<--> ch");
 	rules_processor.addRuleText(L"цк*x	<--> ck+h");
 	rules_processor.addRuleText(L"ш		<--> sh");
 	rules_processor.addRuleText(L"ск*х	<--> sk+h");
@@ -74,7 +76,7 @@ AutomataCreator::AutomataCreator() {
 	rules_processor.addRuleText(L"ь		<--> ie");
 	rules_processor.addRuleText(L"ий*е	<--> iy+e");
 	rules_processor.addRuleText(L"ъ		<--> oa");
-	rules_processor.addRuleText(L"oх*а	<--> oh+a");
+	rules_processor.addRuleText(L"ох*а	<--> oh+a");
 
 	rules_processor.addRuleText(L"ув	<--> w");
 	rules_processor.addRuleText(L"оуф*в	<--> ouf+v");
@@ -110,5 +112,5 @@ AutomataCreator::AutomataCreator() {
 	rules_processor.addRuleText(L"йи*ой*ех*а	<--> yi+oy+eh+a");
 
 	rules_processor.addRuleText(L"йи*ув		<--> yi*w");
-	rules_processor.addRuleText(L"йи*уф+в	<--> yi*ouf*v");*/
+	rules_processor.addRuleText(L"йи*уф+в	<--> yi*ouf*v");
 }

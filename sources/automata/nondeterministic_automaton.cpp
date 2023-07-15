@@ -59,6 +59,7 @@ size_t NondeterministicAutomaton::getRoot() const {
 
 size_t NondeterministicAutomaton::addNode() {
 	nodes.emplace_back();
+	current_state.push_back(false);
 	return nodes.size() - 1;
 }
 
