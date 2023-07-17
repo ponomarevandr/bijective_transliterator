@@ -12,66 +12,73 @@ void Translator::setup() {
 	automaton_en_ru = creator.getAutomatonEnRu();
 }
 
-WordCodes Translator::transliterateWord(const WordCodes& word, DeterministicAutomaton& automaton) {
+WordCodes Translator::transliterateWord(WordCodes& word, DeterministicAutomaton& automaton) {
 	automaton.reset();
 	WordCodes result;
-	for (size_t i = 1; i <= word.size(); ++i) {
-		automaton.step(word[i - 1]);
+	word.push_back(CODE_END);
+	for (size_t i = 0;; ++i) {
+		automaton.step(word[i]);
 		if (automaton.isCurrentPerspective())
 			continue;
-		automaton.undoStep();
-		if (!automaton.isCurrentTerminal()) {
-			automaton.reset();
-			result.push_back(CODE_UNKNOWN);
-			continue;
-		}
-		--i;
+		do {
+			automaton.undoStep();
+			--i;
+		} while (!automaton.isCurrentTerminal() &&
+			automaton.getCurrentState() != automaton.getRoot());
+		if (!automaton.isCurrentTerminal())
+			break;
 		append(result, automaton.currentActionResult());
 		automaton.reset();
-	}
-	if (automaton.isCurrentTerminal()) {
-		append(result, automaton.currentActionResult());
-	} else {
-		result.push_back(CODE_UNKNOWN);
 	}
 	return result;
 }
 
-std::wstring Translator::transliterateRuEn(const std::wstring& text) {
+std::wstring Translator::transliterateText(std::function<bool(wchar_t)> is_language,
+		std::function<WordCodes(const std::wstring&)> encode,
+		std::function<std::wstring(const WordCodes&)> decode,
+		DeterministicAutomaton& automaton, const std::wstring& text) {
 	std::wstring result;
 	std::wstring word;
-	for (wchar_t symbol : text) {
-		if (isRussian(symbol) && isLowerCase(symbol)) {
+	for (size_t i = 0;; ++i) {
+		wchar_t symbol = i < text.size() ? text[i] : L'\0';
+		if (is_language(symbol) && isLowerCase(symbol)) {
 			word.push_back(symbol);
 			continue;
 		}
 		if (!word.empty()) {
 			bool is_capital = isUpperCase(word[0]);
 			word[0] = lowerCase(word[0]);
-			WordCodes codes = encodeRussian(word);
-			codes = transliterateWord(codes, automaton_ru_en);
-			std::wstring transliterated = decodeEnglish(codes);
+			WordCodes codes = encode(word);
+			codes = transliterateWord(codes, automaton);
+			std::wstring transliterated = decode(codes);
 			if (is_capital)
 				transliterated[0] = upperCase(transliterated[0]);
 			append(result, transliterated);
 			word.clear();
 		}
-		if (!isRussian(symbol)) {
-			result.push_back(symbol);
+		if (i == text.size())
+			break;
+		if (is_language(symbol)) {
+			word.push_back(symbol);
 			continue;
 		}
-		word.push_back(symbol);
-	}
-	if (!word.empty()) {
-		bool is_capital = isUpperCase(word[0]);
-		word[0] = lowerCase(word[0]);
-		WordCodes codes = encodeRussian(word);
-		codes = transliterateWord(codes, automaton_ru_en);
-		std::wstring transliterated = decodeEnglish(codes);
-		if (is_capital)
-			transliterated[0] = upperCase(transliterated[0]);
-		append(result, transliterated);
-		word.clear();
+		result.push_back(symbol);
 	}
 	return result;
+}
+
+std::wstring Translator::transliterateRuEn(const std::wstring& text) {
+	return transliterateText(isRussian, [](const std::wstring& string) {
+		return encodeRussian(string);
+	}, [](const WordCodes& word_codes) {
+		return decodeEnglish(word_codes);
+	}, automaton_ru_en, text);
+}
+
+std::wstring Translator::transliterateEnRu(const std::wstring& text) {
+	return transliterateText(isEnglish, [](const std::wstring& string) {
+		return encodeEnglish(string);
+	}, [](const WordCodes& word_codes) {
+		return decodeRussian(word_codes);
+	}, automaton_en_ru, text);
 }

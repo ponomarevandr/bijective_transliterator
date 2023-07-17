@@ -4,6 +4,7 @@
 #include "automata/deterministic_automaton.h"
 
 #include <string>
+#include <functional>
 
 
 class Translator {
@@ -19,7 +20,11 @@ private:
 		}
 	}
 
-	static WordCodes transliterateWord(const WordCodes&, DeterministicAutomaton&);
+	static WordCodes transliterateWord(WordCodes&, DeterministicAutomaton&);
+	std::wstring transliterateText(std::function<bool(wchar_t)> is_language,
+		std::function<WordCodes(const std::wstring&)> encode,
+		std::function<std::wstring(const WordCodes&)> decode,
+		DeterministicAutomaton& automaton, const std::wstring& text);
 
 public:
 	Translator() = default;
