@@ -28,7 +28,7 @@ NondeterministicAutomaton::ActionFunction NondeterministicAutomaton::getCurrentA
 		if (current_state[i])
 			return nodes[i].action;
 	}
-	return [](const std::vector<size_t>&) -> WordCodes {
+	return [](const std::vector<std::pair<Code, size_t>>&) -> WordCodes {
 		return encodeEnglish(L"ERROR");
 	};
 }

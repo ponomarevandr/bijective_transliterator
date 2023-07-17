@@ -10,7 +10,7 @@
 class NondeterministicAutomaton {
 public:
 	using MaskState = std::vector<int8_t>;
-	using ActionFunction = std::function<WordCodes(const std::vector<size_t>&)>;
+	using ActionFunction = std::function<WordCodes(const std::vector<std::pair<Code, size_t>>&)>;
 
 private:
 	struct Node {

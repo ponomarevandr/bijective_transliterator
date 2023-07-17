@@ -47,7 +47,7 @@ AutomataCreator::AutomataCreator() {
 	rules_processor.addRuleText(L"ц <--> c");
 
 	rules_processor.addRuleText(L"ч		<--> ch");
-	rules_processor.addRuleText(L"цк*x	<--> ck+h");
+	rules_processor.addRuleText(L"цк*х	<--> ck+h");
 	rules_processor.addRuleText(L"ш		<--> sh");
 	rules_processor.addRuleText(L"ск*х	<--> sk+h");
 	rules_processor.addRuleText(L"щ		<--> shch");

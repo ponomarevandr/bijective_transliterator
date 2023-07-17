@@ -9,7 +9,7 @@
 
 class DeterministicAutomaton {
 public:
-	using ActionFunction = std::function<WordCodes(const std::vector<size_t>&)>;
+	using ActionFunction = std::function<WordCodes(const std::vector<std::pair<Code, size_t>>&)>;
 
 private:
 	struct Node {
@@ -25,8 +25,7 @@ private:
 	std::vector<Node> nodes;
 	size_t current_state = 0;
 	std::vector<size_t> history;
-	std::vector<size_t> series_length;
-	Code previous_code;
+	std::vector<std::pair<Code, size_t>> series;
 
 private:
 	void updateIsPerspective(size_t node);

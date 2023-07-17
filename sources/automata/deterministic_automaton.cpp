@@ -17,7 +17,7 @@ DeterministicAutomaton::DeterministicAutomaton() {
 void DeterministicAutomaton::reset() {
 	current_state = 0;
 	history.clear();
-	series_length.clear();
+	series.clear();
 }
 
 size_t DeterministicAutomaton::getCurrentState() const {
@@ -33,18 +33,15 @@ bool DeterministicAutomaton::isCurrentPerspective() const {
 }
 
 WordCodes DeterministicAutomaton::currentActionResult() const {
-	return nodes[current_state].action(series_length);
+	return nodes[current_state].action(series);
 }
 
 void DeterministicAutomaton::step(Code code) {
 	history.push_back(current_state);
 	current_state = nodes[current_state].next[code];
-	if (series_length.empty() || code != previous_code) {
-		series_length.push_back(1);
-		previous_code = code;
-	} else {
-		++series_length.back();
-	}
+	if (series.empty() || code != series.back().first)
+		series.emplace_back(code, 0);
+	++series.back().second;
 }
 
 void DeterministicAutomaton::undoStep() {
@@ -52,11 +49,9 @@ void DeterministicAutomaton::undoStep() {
 		return;
 	current_state = history.back();
 	history.pop_back();
-	if (series_length.back() == 0) {
-		series_length.pop_back();
-	} else {
-		--series_length.back();
-	}
+	--series.back().second;
+	if (series.back().second == 0)
+		series.pop_back();
 }
 
 size_t DeterministicAutomaton::getRoot() const {

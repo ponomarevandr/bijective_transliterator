@@ -10,6 +10,8 @@
 
 class RulesProcessor {
 public:
+	using Series = std::vector<std::pair<Code, size_t>>;
+
 	class Instruction {
 	private:
 		enum class Type {
@@ -24,6 +26,7 @@ public:
 			Code code;
 			Type type;
 			size_t series_index;
+			Code series_code;
 		};
 
 	private:
@@ -34,9 +37,9 @@ public:
 
 	public:
 		Instruction(const std::wstring& my, const std::wstring& opposite,
-			std::function<Code(wchar_t)> encode);
+			std::function<Code(wchar_t)> encode_my, std::function<Code(wchar_t)> encode_opposite);
 		size_t addToAutomaton(NondeterministicAutomaton&) const;
-		WordCodes operator()(const std::vector<size_t>& series_length) const;
+		WordCodes operator()(const Series& series) const;
 	};
 
 private:
