@@ -25,7 +25,7 @@ bool NondeterministicAutomaton::isCurrentTerminal() const {
 
 NondeterministicAutomaton::ActionFunction NondeterministicAutomaton::getCurrentAction() const {
 	for (size_t i = 0; i < nodes.size(); ++i) {
-		if (current_state[i])
+		if (current_state[i] && nodes[i].is_terminal)
 			return nodes[i].action;
 	}
 	return [](const std::vector<std::pair<Code, size_t>>&) -> WordCodes {
