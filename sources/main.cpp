@@ -1,49 +1,33 @@
 #include "RuEnTransliterator.h"
 
 #include "translator/translator.h"
-#include "tester/tester.h"
 
 #include <iostream>
 #include <string>
 
 
 int main() {
-	Transliterator::setNeutralLocale();
+	RuEnTransliterator::setNeutralLocale();
 
-	Translator translator;
-	translator.setup();
-
-	/*std::wcout << translator.transliterateRuEn(L"Выберете целевой язык:\n");
+	std::wcout << RuEnTransliterator::russianToEnglish(L"Выберете целевой язык:\n");
 	std::wstring language;
 	std::getline(std::wcin, language);
-	language = translator.transliterateRuEn(language);
+	language = RuEnTransliterator::russianToEnglish(language);
 
 	if (language[0] == 'e' || language[0] == 'a') {
-		std::wcout << translator.transliterateRuEn(
+		std::wcout << RuEnTransliterator::russianToEnglish(
 			L"Хорошо, транслитерируем на английский\n\n");
 		std::wstring text;
 		while (std::getline(std::wcin, text)) {
-			std::wcout << translator.transliterateRuEn(text) << "\n";
+			std::wcout << RuEnTransliterator::russianToEnglish(text) << "\n";
 		}
 	} else if (language[0] == 'r') {
-		std::wcout << translator.transliterateEnRu(L"OK, transliterating to Russian\n\n");
+		std::wcout << RuEnTransliterator::englishToRussian(L"OK, transliterating to Russian\n\n");
 		std::wstring text;
 		while (std::getline(std::wcin, text)) {
-			std::wcout << translator.transliterateEnRu(text) << "\n";
+			std::wcout << RuEnTransliterator::englishToRussian(text) << "\n";
 		}
-	}*/
-
-	Tester tester([&translator](const std::wstring& text) {
-		return translator.transliterateRuEn(text);
-	}, [&translator](const std::wstring& text) {
-		return translator.transliterateEnRu(text);
-	});
-	//tester.setSymbols(L"аоуыэеёюяъьйх");
-	//tester.run(5);
-	tester.setSymbols(L"аоуыэеёюяъьйх");
-	tester.run(6);
-	tester.run(5);
-
+	}
 
 	return 0;
 }

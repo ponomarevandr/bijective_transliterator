@@ -4,6 +4,8 @@
 #include "automata/determinizer.h"
 
 
+namespace RuEnTransliterator {
+
 void AutomataCreator::run() {
 	rules_processor.run();
 	Determinizer determinizer_ru_en(rules_processor.getAutomatonRuEn());
@@ -118,4 +120,6 @@ AutomataCreator::AutomataCreator() {
 	rules_processor.addRuleText(L"кх+ш		<--> kh*sh");
 	rules_processor.addRuleText(L"кск*х		<--> xk+h");
 	rules_processor.addRuleText(L"кх+ск*х	<--> kh*sk+h");
+}
+
 }

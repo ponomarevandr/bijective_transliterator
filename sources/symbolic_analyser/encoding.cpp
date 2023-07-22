@@ -1,6 +1,8 @@
 #include "encoding.h"
 
 
+namespace RuEnTransliterator {
+
 const Code CODE_END = 0;
 const Code CODE_UNKNOWN = 1;
 
@@ -161,4 +163,6 @@ std::wstring decodeEnglish(const WordCodes& codes) {
 		result.push_back(decodeEnglish(code));
 	}
 	return result;
+}
+
 }

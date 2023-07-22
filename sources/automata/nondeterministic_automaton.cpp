@@ -1,6 +1,8 @@
 #include "nondeterministic_automaton.h"
 
 
+namespace RuEnTransliterator {
+
 NondeterministicAutomaton::NondeterministicAutomaton() {
 	nodes.emplace_back();
 	current_state.push_back(true);
@@ -88,4 +90,6 @@ void NondeterministicAutomaton::debugPrint(std::wostream& out) const {
 			out << ";\n";
 		}
 	}
+}
+
 }

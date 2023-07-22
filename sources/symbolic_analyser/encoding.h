@@ -4,6 +4,8 @@
 #include <string>
 
 
+namespace RuEnTransliterator {
+
 using Code = int8_t;
 using WordCodes = std::vector<Code>;
 
@@ -33,3 +35,5 @@ WordCodes encodeRussian(const std::wstring&);
 WordCodes encodeEnglish(const std::wstring&);
 std::wstring decodeRussian(const WordCodes&);
 std::wstring decodeEnglish(const WordCodes&);
+
+}

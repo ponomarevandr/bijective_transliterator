@@ -8,6 +8,8 @@
 #include "automata/nondeterministic_automaton.h"
 
 
+namespace RuEnTransliterator {
+
 class RulesProcessor {
 public:
 	using Series = std::vector<std::pair<Code, size_t>>;
@@ -58,3 +60,5 @@ public:
 	NondeterministicAutomaton getAutomatonRuEn();
 	NondeterministicAutomaton getAutomatonEnRu();
 };
+
+}

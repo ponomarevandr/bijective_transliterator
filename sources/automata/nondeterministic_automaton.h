@@ -7,6 +7,8 @@
 #include <functional>
 
 
+namespace RuEnTransliterator {
+
 class NondeterministicAutomaton {
 public:
 	using MaskState = std::vector<int8_t>;
@@ -38,3 +40,5 @@ public:
 	void addNext(size_t node, Code code, size_t next);
 	void debugPrint(std::wostream&) const;
 };
+
+}

@@ -5,6 +5,8 @@
 #include <functional>
 
 
+namespace RuEnTransliterator {
+
 class Tester {
 private:
 	using Conversion = std::function<std::wstring(const std::wstring&)>;
@@ -29,3 +31,5 @@ public:
 	void setSymbols(const std::wstring&);
 	void run(size_t word_size);
 };
+
+}

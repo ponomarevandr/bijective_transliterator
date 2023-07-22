@@ -4,6 +4,8 @@
 #include <algorithm>
 
 
+namespace RuEnTransliterator {
+
 DeterministicAutomaton::Node::Node() {
 	for (size_t i = 0; i < CODE_LOWER_SIZE; ++i) {
 		next[i] = 0;
@@ -120,4 +122,6 @@ void DeterministicAutomaton::debugPrint(std::wostream& out) const {
 			out << " --> " << edges[j].first << ";\n";
 		}
 	}
+}
+
 }

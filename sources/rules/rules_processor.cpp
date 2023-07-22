@@ -1,6 +1,8 @@
 #include "rules_processor.h"
 
 
+namespace RuEnTransliterator {
+
 void RulesProcessor::Instruction::append(WordCodes& word_codes, size_t number, Code code) {
 	for (size_t i = 0; i < number; ++i) {
 		word_codes.push_back(code);
@@ -144,4 +146,6 @@ NondeterministicAutomaton RulesProcessor::getAutomatonRuEn() {
 
 NondeterministicAutomaton RulesProcessor::getAutomatonEnRu() {
 	return std::move(automaton_en_ru);
+}
+
 }

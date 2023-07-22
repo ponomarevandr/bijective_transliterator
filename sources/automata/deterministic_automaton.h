@@ -7,6 +7,8 @@
 #include <functional>
 
 
+namespace RuEnTransliterator {
+
 class DeterministicAutomaton {
 public:
 	using ActionFunction = std::function<WordCodes(const std::vector<std::pair<Code, size_t>>&)>;
@@ -46,3 +48,5 @@ public:
 	void updateIsPerspective();
 	void debugPrint(std::wostream&) const;
 };
+
+}

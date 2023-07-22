@@ -7,6 +7,8 @@
 #include <map>
 
 
+namespace RuEnTransliterator {
+
 class Determinizer {
 private:
 	using MaskState = NondeterministicAutomaton::MaskState;
@@ -28,3 +30,5 @@ public:
 	void run();
 	DeterministicAutomaton getResult();
 };
+
+}

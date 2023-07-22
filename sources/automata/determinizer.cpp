@@ -3,6 +3,8 @@
 #include "symbolic_analyser/encoding.h"
 
 
+namespace RuEnTransliterator {
+
 bool Determinizer::MasksComparator::operator()(const MaskState& first,
 		const MaskState& second) const {
 	for (size_t i = 0; i < first.size(); ++i) {
@@ -51,4 +53,6 @@ void Determinizer::run() {
 
 DeterministicAutomaton Determinizer::getResult() {
 	return std::move(result);
+}
+
 }

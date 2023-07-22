@@ -5,6 +5,8 @@
 #include <exception>
 
 
+namespace RuEnTransliterator {
+
 size_t Tester::power(size_t base, size_t exponent) {
 	size_t result = 1;
 	for (size_t i = 0; i < exponent; ++i) {
@@ -77,4 +79,6 @@ void Tester::run(size_t word_size) {
 		std::chrono::duration_cast<std::chrono::milliseconds>(time_end - time_begin).count();
 	std::wcout << L"\nPassed successfully\n";
 	std::wcout << words_counter << L" words, " << ms_elapsed << L"ms elapsed\n";
+}
+
 }

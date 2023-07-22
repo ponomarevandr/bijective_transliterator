@@ -6,6 +6,8 @@
 #include <string>
 
 
+namespace RuEnTransliterator {
+
 class AutomataCreator {
 private:
 	RulesProcessor rules_processor;
@@ -18,3 +20,5 @@ public:
 	DeterministicAutomaton getAutomatonRuEn();
 	DeterministicAutomaton getAutomatonEnRu();
 };
+
+}

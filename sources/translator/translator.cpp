@@ -3,14 +3,16 @@
 #include "rules/automata_creator.h"
 
 
-void Translator::setup() {
+namespace RuEnTransliterator {
+
+void TranslatorImpl::setup() {
 	AutomataCreator creator;
 	creator.run();
 	automaton_ru_en = creator.getAutomatonRuEn();
 	automaton_en_ru = creator.getAutomatonEnRu();
 }
 
-WordCodes Translator::transliterateWord(WordCodes& word, DeterministicAutomaton& automaton) {
+WordCodes TranslatorImpl::transliterateWord(WordCodes& word, DeterministicAutomaton& automaton) {
 	automaton.reset();
 	WordCodes result;
 	word.push_back(CODE_END);
@@ -31,7 +33,7 @@ WordCodes Translator::transliterateWord(WordCodes& word, DeterministicAutomaton&
 	return result;
 }
 
-std::wstring Translator::transliterateText(std::function<bool(wchar_t)> is_language,
+std::wstring TranslatorImpl::transliterateText(std::function<bool(wchar_t)> is_language,
 		std::function<WordCodes(const std::wstring&)> encode,
 		std::function<std::wstring(const WordCodes&)> decode,
 		DeterministicAutomaton& automaton, const std::wstring& text) {
@@ -65,7 +67,7 @@ std::wstring Translator::transliterateText(std::function<bool(wchar_t)> is_langu
 	return result;
 }
 
-std::wstring Translator::transliterateRuEn(const std::wstring& text) {
+std::wstring TranslatorImpl::transliterateRuEn(const std::wstring& text) {
 	return transliterateText(isRussian, [](const std::wstring& string) {
 		return encodeRussian(string);
 	}, [](const WordCodes& word_codes) {
@@ -73,10 +75,12 @@ std::wstring Translator::transliterateRuEn(const std::wstring& text) {
 	}, automaton_ru_en, text);
 }
 
-std::wstring Translator::transliterateEnRu(const std::wstring& text) {
+std::wstring TranslatorImpl::transliterateEnRu(const std::wstring& text) {
 	return transliterateText(isEnglish, [](const std::wstring& string) {
 		return encodeEnglish(string);
 	}, [](const WordCodes& word_codes) {
 		return decodeRussian(word_codes);
 	}, automaton_en_ru, text);
+}
+
 }

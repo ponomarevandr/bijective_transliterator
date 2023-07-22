@@ -1,5 +1,6 @@
 #pragma once
 
+#include "RuEnTransliterator.h"
 #include "symbolic_analyser/encoding.h"
 #include "automata/deterministic_automaton.h"
 
@@ -7,7 +8,9 @@
 #include <functional>
 
 
-class Translator {
+namespace RuEnTransliterator {
+
+class TranslatorImpl: public TranslatorImplBase {
 private:
 	DeterministicAutomaton automaton_ru_en;
 	DeterministicAutomaton automaton_en_ru;
@@ -27,8 +30,10 @@ private:
 		DeterministicAutomaton& automaton, const std::wstring& text);
 
 public:
-	Translator() = default;
+	TranslatorImpl() = default;
 	void setup();
 	std::wstring transliterateRuEn(const std::wstring&);
 	std::wstring transliterateEnRu(const std::wstring&);
 };
+
+}
