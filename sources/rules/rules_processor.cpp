@@ -1,7 +1,5 @@
 #include "rules_processor.h"
 
-#include <iostream>
-
 
 void RulesProcessor::Instruction::append(WordCodes& word_codes, size_t number, Code code) {
 	for (size_t i = 0; i < number; ++i) {

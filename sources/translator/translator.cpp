@@ -2,8 +2,6 @@
 
 #include "rules/automata_creator.h"
 
-#include <iostream>
-
 
 void Translator::setup() {
 	AutomataCreator creator;
