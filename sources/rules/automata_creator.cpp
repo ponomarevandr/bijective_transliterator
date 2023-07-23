@@ -116,10 +116,16 @@ AutomataCreator::AutomataCreator() {
 
 	rules_processor.addRuleText(L"кс		<--> x");
 	rules_processor.addRuleText(L"кг+с		<--> kg*s");
+
 	rules_processor.addRuleText(L"кш		<--> xh");
 	rules_processor.addRuleText(L"кг+ш		<--> kg*sh");
 	rules_processor.addRuleText(L"кск*х		<--> xk+h");
 	rules_processor.addRuleText(L"кг+ск*х	<--> kg*sk+h");
+
+	rules_processor.addRuleText(L"кщ		<--> xhch");
+	rules_processor.addRuleText(L"кг+щ		<--> kg*shch");
+	rules_processor.addRuleText(L"кшт*ч		<--> xht+ch");
+	rules_processor.addRuleText(L"кг+шт*ч	<--> kg*sht+ch");
 }
 
 }

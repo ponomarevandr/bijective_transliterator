@@ -37,8 +37,9 @@ bool Tester::nextWord() {
 }
 
 void Tester::updateWord() {
-	for (size_t i = word_size; i > 0 && is_changed[i]; --i) {
+	for (size_t i = word_size; i > 0 && is_changed[i - 1]; --i) {
 		word[i - 1] = symbols[codes[i - 1]];
+		is_changed[i - 1] = false;
 	}
 }
 

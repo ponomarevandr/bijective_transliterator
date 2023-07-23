@@ -8,18 +8,16 @@
 size_t estimatedLength(size_t symbols_number) {
 	if (symbols_number > 20)
 		return 4;
-	if (symbols_number > 13)
+	if (symbols_number > 11)
 		return 5;
-	if (symbols_number > 9)
+	if (symbols_number > 7)
 		return 6;
-	if (symbols_number > 6)
-		return 7;
 	if (symbols_number > 5)
-		return 8;
+		return 7;
 	if (symbols_number > 4)
-		return 9;
+		return 8;
 	if (symbols_number > 3)
-		return 10;
+		return 9;
 	return 12;
 }
 
@@ -82,6 +80,9 @@ int main() {
 
 	testRussianToEnglish(L"кгсшх");
 	testEnglishToRussian(L"xkgsh");
+
+	testRussianToEnglish(L"кгсщшчт");
+	testEnglishToRussian(L"xkgsch");
 
 	return 0;
 }
