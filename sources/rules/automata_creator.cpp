@@ -112,14 +112,14 @@ AutomataCreator::AutomataCreator() {
 	rules_processor.addRuleText(L"йи*уф+в	<--> yi*ouf*v");
 
 	rules_processor.addRuleText(L"къ	<--> q");
-	rules_processor.addRuleText(L"кх+ъ	<--> kh*oa");
+	rules_processor.addRuleText(L"кг+ъ	<--> kg*oa");
 
 	rules_processor.addRuleText(L"кс		<--> x");
-	rules_processor.addRuleText(L"кх+с		<--> kh*s");
+	rules_processor.addRuleText(L"кг+с		<--> kg*s");
 	rules_processor.addRuleText(L"кш		<--> xh");
-	rules_processor.addRuleText(L"кх+ш		<--> kh*sh");
+	rules_processor.addRuleText(L"кг+ш		<--> kg*sh");
 	rules_processor.addRuleText(L"кск*х		<--> xk+h");
-	rules_processor.addRuleText(L"кх+ск*х	<--> kh*sk+h");
+	rules_processor.addRuleText(L"кг+ск*х	<--> kg*sk+h");
 }
 
 }
