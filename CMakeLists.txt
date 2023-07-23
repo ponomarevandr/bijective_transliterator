@@ -12,7 +12,6 @@ set(SOURCES
 	sources/rules/rules_processor.cpp
 	sources/rules/automata_creator.cpp
 	sources/translator/translator.cpp
-	sources/tester/tester.cpp
 )
 
 set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} $ENV{CUSTOM_FLAGS}")
@@ -25,3 +24,5 @@ link_directories(${PROJECT_SOURCE_DIR}/lib)
 add_library(RuEnTransliterator SHARED ${SOURCES})
 add_executable(demonstration sources/main.cpp)
 target_link_libraries(demonstration RuEnTransliterator)
+add_executable(tests sources/tests.cpp sources/tester/tester.cpp)
+target_link_libraries(tests RuEnTransliterator)

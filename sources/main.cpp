@@ -1,7 +1,5 @@
 #include "RuEnTransliterator.h"
 
-#include "translator/translator.h"
-
 #include <iostream>
 #include <string>
 
