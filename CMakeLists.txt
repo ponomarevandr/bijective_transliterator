@@ -21,8 +21,14 @@ set(CMAKE_LIBRARY_OUTPUT_DIRECTORY ${PROJECT_SOURCE_DIR}/lib)
 include_directories(${PROJECT_SOURCE_DIR}/include ${PROJECT_SOURCE_DIR}/sources)
 link_directories(${PROJECT_SOURCE_DIR}/lib)
 
+
 add_library(RuEnTransliterator SHARED ${SOURCES})
-add_executable(demonstration sources/main.cpp)
-target_link_libraries(demonstration RuEnTransliterator)
+
+add_executable(russian_to_english sources/russian_to_english.cpp)
+target_link_libraries(russian_to_english RuEnTransliterator)
+
+add_executable(english_to_russian sources/english_to_russian.cpp)
+target_link_libraries(english_to_russian RuEnTransliterator)
+
 add_executable(tests sources/tests.cpp sources/tester/tester.cpp)
 target_link_libraries(tests RuEnTransliterator)

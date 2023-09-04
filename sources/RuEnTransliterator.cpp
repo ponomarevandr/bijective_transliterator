@@ -2,6 +2,9 @@
 
 #include "translator/translator.h"
 
+#include <sstream>
+#include <fstream>
+#include <codecvt>
 #include <locale.h>
 
 
@@ -10,6 +13,19 @@ namespace RuEnTransliterator {
 void setNeutralLocale() {
 	setlocale(LC_ALL, "");
 }
+
+std::wstring readWistream(std::wistream& fin) {
+    fin.imbue(std::locale(std::locale(), new std::codecvt_utf8<wchar_t>));
+    std::wstringstream wss;
+    wss << fin.rdbuf();
+    return wss.str();
+}
+
+void writeWostream(std::wostream& fout, const std::wstring& text) {
+    fout.imbue(std::locale(std::locale(), new std::codecvt_utf8<wchar_t>));
+    fout << text;
+}
+
 
 Transliterator global_transliterator;
 bool setup_done = false;

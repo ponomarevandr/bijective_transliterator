@@ -9,7 +9,7 @@ echo "==================== Running CMake..."
 echo "With custom flags $1"
 CUSTOM_FLAGS="$1"
 export CUSTOM_FLAGS
-cmake ..
+cmake -DCMAKE_BUILD_TYPE=Debug ..
 if [ $? -ne 0 ]; then
 	exit 1
 fi

@@ -8,6 +8,9 @@ namespace RuEnTransliterator {
 
 void setNeutralLocale();
 
+std::wstring readWistream(std::wistream& fin);
+void writeWostream(std::wostream& fout, const std::wstring& text);
+
 std::wstring russianToEnglish(const std::wstring&);
 std::wstring englishToRussian(const std::wstring&);
 
