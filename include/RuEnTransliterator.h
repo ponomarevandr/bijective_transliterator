@@ -6,23 +6,22 @@
 
 namespace RuEnTransliterator {
 
-void setNeutralLocale();
+struct EncodingInfo {
+	bool has_bom;
+};
 
-std::wstring readWistream(std::wistream& fin);
-void writeWostream(std::wostream& fout, const std::wstring& text);
+bool readFileUTF8(const std::string& filename, std::wstring& text, EncodingInfo& info);
+bool writeFileUTF8(const std::string& filename, const std::wstring& text, const EncodingInfo& info);
 
 std::wstring russianToEnglish(const std::wstring&);
 std::wstring englishToRussian(const std::wstring&);
 
 
-class TranslatorImplBase {
-public:
-	virtual ~TranslatorImplBase() = default;
-};
+class TranslatorImpl;
 
 class Transliterator {
 private:
-	std::unique_ptr<TranslatorImplBase> impl;
+	std::unique_ptr<TranslatorImpl> impl;
 
 public:
 	Transliterator();

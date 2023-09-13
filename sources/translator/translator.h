@@ -1,6 +1,5 @@
 #pragma once
 
-#include "RuEnTransliterator.h"
 #include "symbolic_analyser/encoding.h"
 #include "automata/deterministic_automaton.h"
 
@@ -10,7 +9,7 @@
 
 namespace RuEnTransliterator {
 
-class TranslatorImpl: public TranslatorImplBase {
+class TranslatorImpl {
 private:
 	DeterministicAutomaton automaton_ru_en;
 	DeterministicAutomaton automaton_en_ru;

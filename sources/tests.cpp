@@ -2,6 +2,7 @@
 
 #include "tester/tester.h"
 
+#include <locale>
 #include <string>
 
 
@@ -40,7 +41,7 @@ void testEnglishToRussian(const std::wstring& symbols, size_t length = 0) {
 }
 
 int main() {
-	RuEnTransliterator::setNeutralLocale();
+	std::setlocale(LC_ALL, "");
 
 	testRussianToEnglish(L" абвгдеёжзийклмнопрстуфхцчшщъыьэюя", 4);
 	testEnglishToRussian(L" abcdefghijklmnopqrstuvwxyz", 4);
