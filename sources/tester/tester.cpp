@@ -1,5 +1,7 @@
 #include "tester.h"
 
+#include "utils/io_utils.h"
+
 #include <iostream>
 #include <chrono>
 #include <exception>
@@ -52,7 +54,7 @@ void Tester::setSymbols(const std::wstring& symbols) {
 
 void Tester::run(size_t word_size) {
 	this->word_size = word_size;
-	std::wcout << L"Test (\"" << symbols << L"\", " << word_size << L")\n";
+	std::cout << "Test (\"" << wstringToUTF8(symbols) << "\", " << word_size << ")\n";
 	auto time_begin = std::chrono::steady_clock::now();
 	resetWord();
 	size_t words_counter = 0;
@@ -62,24 +64,25 @@ void Tester::run(size_t word_size) {
 		std::wstring image = direct(word);
 		std::wstring inverse_image = inverse(image);
 		if (inverse_image != word) {
-			std::wcout << L"\nError!\n";
-			std::wcout << L"On word \"" << word << L"\"\n";
-			std::wcout << L"The image is \"" << image << L"\", its inverse image is \"" <<
-				inverse_image << L"\".\n";
+			std::cout << "\nError!\n";
+			std::cout << "On word \"" << wstringToUTF8(word) << "\"\n";
+			std::cout << "The image is \"" << wstringToUTF8(image) <<
+				"\", its inverse image is \"" << wstringToUTF8(inverse_image) << "\".";
+			std::cout << std::endl;
 			throw std::exception();
 		}
 		++words_counter;
 		while (words_counter * 20 / words_total > progress_bar) {
-			std::wcout << L"+";
-			std::flush(std::wcout);
+			std::cout << "+";
+			std::flush(std::cout);
 			++progress_bar;
 		}
 	} while (nextWord());
 	auto time_end = std::chrono::steady_clock::now();
 	size_t ms_elapsed =
 		std::chrono::duration_cast<std::chrono::milliseconds>(time_end - time_begin).count();
-	std::wcout << L"\nPassed successfully\n";
-	std::wcout << words_counter << L" words, " << ms_elapsed << L"ms elapsed\n";
+	std::cout << "\nPassed successfully\n";
+	std::cout << words_counter << " words, " << ms_elapsed << "ms elapsed\n";
 }
 
 }

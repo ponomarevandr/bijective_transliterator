@@ -1,7 +1,7 @@
 #include "RuEnTransliterator.h"
 
 #include "translator/translator.h"
-#include "utils/file_io_utils.h"
+#include "utils/io_utils.h"
 
 
 namespace RuEnTransliterator {

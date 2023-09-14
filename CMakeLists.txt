@@ -12,7 +12,7 @@ set(SOURCES
 	sources/rules/rules_processor.cpp
 	sources/rules/automata_creator.cpp
 	sources/translator/translator.cpp
-	sources/utils/file_io_utils.cpp
+	sources/utils/io_utils.cpp
 )
 
 set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} $ENV{CUSTOM_FLAGS}")

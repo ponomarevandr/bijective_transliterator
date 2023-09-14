@@ -100,7 +100,7 @@ std::vector<std::wstring> RulesProcessor::split(const std::wstring& text) {
 	std::vector<std::wstring> result;
 	result.emplace_back();
 	for (size_t i = 0; i < text.size(); ++i) {
-		if (!std::isspace(text[i])) {
+		if (!std::iswspace(text[i])) {
 			result.back().push_back(text[i]);
 			continue;
 		}
